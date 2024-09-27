@@ -27,7 +27,7 @@ fi
 #########################################################################################################
 
 #########################################################################################################
-# REEEMPLAZAR ESTE ENFOQUE NFS
+# REEEMPLAZAR ESTE ENFOQUE POR NFS
 # Se monta el directorio remoto via sshfs
 # Si no existe el directorio IMG_UPLOAD_DIR, se crea
 if [ ! -d $IMG_UPLOAD_DIR ]; then
