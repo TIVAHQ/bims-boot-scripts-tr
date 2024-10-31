@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Verifica si los directorios necesarios están presentes
+if [ -d "/mnt/bims-bucket-1/saas/img_upload_migrate" ] && [ -d "/mnt/bims-bucket-1/saas/private_upload" ]; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - El bucket está correctamente montado."
+else
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - El bucket no está montado. Intentando remontarlo..."
+    # Desmontar y volver a montar el bucket
+    umount /mnt/bims-bucket-1
+    fusermount -u /mnt/bims-bucket-1
+    gcsfuse --implicit-dirs --file-mode 777 --dir-mode 777 -o allow_other bims-bucket-1 /mnt/bims-bucket-1
+
+    # Verificar si el montaje fue exitoso
+    if [ -d "/mnt/bims-bucket-1/saas/img_upload_migrate" ] && [ -d "/mnt/bims-bucket-1/saas/private_upload" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - El bucket se ha montado correctamente."
+    else
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: No se pudo montar el bucket."
+    fi
+fi

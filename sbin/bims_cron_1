@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Este script se ejecuta cada 1 minuto
+
+# Cada 5 Minutos
+if [ $(date +%M) -eq 0 ] || [ $(date +%M) -eq 5 ] || [ $(date +%M) -eq 10 ] || [ $(date +%M) -eq 15 ] || [ $(date +%M) -eq 20 ] || [ $(date +%M) -eq 25 ] || [ $(date +%M) -eq 30 ] || [ $(date +%M) -eq 35 ] || [ $(date +%M) -eq 40 ] || [ $(date +%M) -eq 45 ] || [ $(date +%M) -eq 50 ] || [ $(date +%M) -eq 55 ]; then
+    # Verificar si el bucket está montado
+    /usr/local/sbin/bims_check_cloud_storage
+
+    # Sincronizar los archivos de BIMS
+    /usr/local/sbin/bims_sync
+fi
+
+# Cada 10 Minutos
+if [ $(date +%M) -eq 0 ] || [ $(date +%M) -eq 10 ] || [ $(date +%M) -eq 20 ] || [ $(date +%M) -eq 30 ] || [ $(date +%M) -eq 40 ] || [ $(date +%M) -eq 50 ]; then
+    # Actualiza el Boot Script via GitHub
+    cd /opt/install/bims-boot-scripts;
+    git pull origin main;
+
+    # Si hay cambios se ejecutan acciones
+    if [ $(git diff --name-only HEAD@{1} HEAD | wc -l) -gt 0 ]; then
+        # Reiniciar el servicio
+        systemctl restart bims_cron_1
+    fi
+fi

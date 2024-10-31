@@ -21,7 +21,7 @@ chmod 755 /usr/sbin/bims_sync;
 ############################################################################################################
 # Se añade la ejecución del comando bims_sync al cron cada 5 minutos
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Añadiendo bims_sync al cron" >> /var/log/bims_boot.log
-echo "*/5 * * * * root /usr/sbin/bims_sync";
+echo "*/5 * * * * root /usr/sbin/bims_sync" >> /etc/crond.d/bims_sync;
 ############################################################################################################
 
 ############################################################################################################
@@ -30,7 +30,16 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando comando bims_cron_1" >> /var/log
 cp -f ./sbin/bims_cron_1 /usr/sbin/bims_cron_1;
 chmod 755 /usr/sbin/bims_cron_1;
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Añadiendo bims_cron_1 al cron" >> /var/log/bims_boot.log
-echo "* * * * * root /usr/sbin/bims_cron_1";
+echo "* * * * * root /usr/sbin/bims_cron_1" >> /etc/crond.d/bims_cron_1;
+############################################################################################################
+
+############################################################################################################
+# Se instala el watchdog del bucket de Google Cloud Storage
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando watchdog del bucket de Google Cloud Storage" >> /var/log/bims_boot.log
+cp -f ./sbin/bims_check_cloud_storage /usr/sbin/bims_check_cloud_storage;
+chmod 755 /usr/sbin/bims_check_cloud_storage;
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Añadiendo bims_check_cloud_storage al cron" >> /var/log/bims_boot.log
+echo "* * * * * root /usr/sbin/bims_check_cloud_storage >> /var/log/check_mount.log 2>&1" >> /etc/crond.d/bims_check_cloud_storage;
 ############################################################################################################
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
