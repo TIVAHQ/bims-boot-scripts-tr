@@ -2,6 +2,8 @@
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Iniciado" >> /var/log/bims_boot.log
 
+BOOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+
 ############################################################################################################
 # Se instala el key para rsync
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando key para rsync" >> /var/log/bims_boot.log
