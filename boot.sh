@@ -1,45 +1,28 @@
 #!/bin/bash
 
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Iniciado" >> /var/log/bims_boot.log
+LOG_FILE="/var/log/bims_boot.log"
+BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
 
-BOOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Iniciado" >> $LOG_FILE
 
 ############################################################################################################
 # Se instala el key para rsync
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando key para rsync" >> /var/log/bims_boot.log
-rm -rf /root/rsync;
-cp -R ./rsync /root/rsync;
+bash $BOOT_SCRIPTS_PATH/install/install_rsync_key.sh
 ############################################################################################################
 
 ############################################################################################################
 # Se instala el comando bims_sync
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando comando bims_sync" >> /var/log/bims_boot.log
-cp -f ./sbin/bims_sync /usr/sbin/bims_sync;
-chmod 755 /usr/sbin/bims_sync;
-############################################################################################################
-
-############################################################################################################
-# Se añade la ejecución del comando bims_sync al cron cada 5 minutos
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Añadiendo bims_sync al cron" >> /var/log/bims_boot.log
-echo "*/5 * * * * root /usr/sbin/bims_sync" >> /etc/crond.d/bims_sync;
+bash $BOOT_SCRIPTS_PATH/install/install_bims_sync.sh
 ############################################################################################################
 
 ############################################################################################################
 # Se instala el comando bims_cron_1 y se programa su ejecución cada 1 minuto
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando comando bims_cron_1" >> /var/log/bims_boot.log
-cp -f ./sbin/bims_cron_1 /usr/sbin/bims_cron_1;
-chmod 755 /usr/sbin/bims_cron_1;
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Añadiendo bims_cron_1 al cron" >> /var/log/bims_boot.log
-echo "* * * * * root /usr/sbin/bims_cron_1" >> /etc/crond.d/bims_cron_1;
+bash $BOOT_SCRIPTS_PATH/install/install_bims_cron_1.sh
 ############################################################################################################
 
 ############################################################################################################
 # Se instala el watchdog del bucket de Google Cloud Storage
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando watchdog del bucket de Google Cloud Storage" >> /var/log/bims_boot.log
-cp -f ./sbin/bims_check_cloud_storage /usr/sbin/bims_check_cloud_storage;
-chmod 755 /usr/sbin/bims_check_cloud_storage;
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Añadiendo bims_check_cloud_storage al cron" >> /var/log/bims_boot.log
-echo "* * * * * root /usr/sbin/bims_check_cloud_storage >> /var/log/check_mount.log 2>&1" >> /etc/crond.d/bims_check_cloud_storage;
+bash $BOOT_SCRIPTS_PATH/install/install_bims_check_cloud_storage.sh
 ############################################################################################################
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
