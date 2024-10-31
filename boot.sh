@@ -16,13 +16,13 @@ bash $BOOT_SCRIPTS_PATH/install/install_bims_sync.sh
 ############################################################################################################
 
 ############################################################################################################
-# Se instala el comando bims_cron_1 y se programa su ejecución cada 1 minuto
-bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
+# Se instala el watchdog del bucket de Google Cloud Storage
+bash $BOOT_SCRIPTS_PATH/install/install_bims_check_cloud_storage.sh
 ############################################################################################################
 
 ############################################################################################################
-# Se instala el watchdog del bucket de Google Cloud Storage
-bash $BOOT_SCRIPTS_PATH/install/install_bims_check_cloud_storage.sh
+# Se instala el comando bims_cron_1 y se programa su ejecución cada 1 minuto
+bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
 ############################################################################################################
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
