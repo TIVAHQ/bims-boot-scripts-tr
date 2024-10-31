@@ -1,0 +1,1 @@
+rsync -az -e "ssh -i /root/rsync/rsync_key" --exclude-from='/root/rsync/exclusions.txt' root@10.158.0.9:/var/www/vhosts/secure.bimsapp.com/public/ /var/www/vhosts/bims.app/public/ -v
