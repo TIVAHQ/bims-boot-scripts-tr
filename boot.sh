@@ -17,7 +17,7 @@ bash $BOOT_SCRIPTS_PATH/install/install_bims_sync.sh
 
 ############################################################################################################
 # Se instala el comando bims_cron_1 y se programa su ejecución cada 1 minuto
-bash $BOOT_SCRIPTS_PATH/install/install_bims_cron_1.sh
+bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
 ############################################################################################################
 
 ############################################################################################################

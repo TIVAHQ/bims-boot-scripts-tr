@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Este script se ejecuta cada 1 minuto
+BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
+GIT_COMMIT_LOG_FILE="$BOOT_SCRIPTS_PATH/last_commit.txt"
+
+# Se lee el valor del último commit
+LAST_COMMIT=$(cat $GIT_COMMIT_LOG_FILE);
+
+# Actualiza el Boot Script via GitHub
+cd $BOOT_SCRIPTS_PATH;
+git pull origin main;
+
+# Se obtiene el valor del último commit después de la actualización
+NEW_COMMIT=$(git log -1 --pretty=format:"%h - %an, %ar");
+
+# Si el último commit es diferente al anterior entonces se vuelve a ejecutar boot.sh
+if [ "$LAST_COMMIT" != "$NEW_COMMIT" ]; then
+    echo $NEW_COMMIT > $GIT_COMMIT_LOG_FILE;
+    bash $BOOT_SCRIPTS_PATH/boot.sh;
+fi

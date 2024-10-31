@@ -1,0 +1,23 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+
+# Cada Minuto se chequea el estado del montaje del bucket de Google Cloud Storage
+* * * * * root /usr/sbin/bims_check_cloud_storage
+
+# Cada 5 Minutos se sincronizan los archivos de BIMS
+*/5 * * * * root /usr/sbin/bims_sync
+
+# Cada 10 Minutos se actualiza el Boot Script via GitHub
+*/10 * * * * root /usr/sbin/bims_cron
