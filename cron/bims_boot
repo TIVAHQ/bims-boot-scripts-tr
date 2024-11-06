@@ -20,4 +20,4 @@ MAILTO=root
 */2 * * * * root /usr/sbin/bims_sync
 
 # Cada 10 Minutos se actualiza el Boot Script via GitHub
-*/10 * * * * root /usr/sbin/bims_update_boot_scripts
+*/2 * * * * root /usr/sbin/bims_update_boot_scripts

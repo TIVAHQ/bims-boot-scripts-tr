@@ -57,27 +57,15 @@ fi
 # Archivo de configuración de Apache
 CONFIG_FILE="/etc/httpd/conf.d/php.conf"
 
-# Líneas a buscar y comentar
-LINE1='php_value session.save_handler "files"'
-LINE2='php_value session.save_path "/var/lib/php/session"'
-
-# Función para comentar una línea si no está comentada
-comment_line_if_uncommented() {
-    local line="$1"
-    local file="$2"
-    # Verifica si la línea existe sin comentar y la comenta si es necesario
-    if grep -Fxq "$line" "$file"; then
-        sed -i "s|^$line|# $line|" "$file"
-        echo "Comentada la línea: $line"
-        RESTART_NEEDED=1
-    else
-        echo "La línea ya está comentada o no existe: $line"
-    fi
-}
-
-# Comentar las líneas si es necesario
-comment_line_if_uncommented "$LINE1" "$CONFIG_FILE"
-comment_line_if_uncommented "$LINE2" "$CONFIG_FILE"
+# Eliminar líneas con "session.save_handler" o "session.save_path"
+if grep -Eq "session.save_handler|session.save_path" "$CONFIG_FILE"; then
+    sed -i '/session.save_handler/d' "$CONFIG_FILE"
+    sed -i '/session.save_path/d' "$CONFIG_FILE"
+    echo "Líneas con 'session.save_handler' o 'session.save_path' eliminadas en $CONFIG_FILE"
+    RESTART_NEEDED=1
+else
+    echo "No se encontraron líneas con 'session.save_handler' o 'session.save_path' en $CONFIG_FILE"
+fi
 
 # Reiniciar Apache solo si hubo cambios
 if [ $RESTART_NEEDED -eq 1 ]; then
