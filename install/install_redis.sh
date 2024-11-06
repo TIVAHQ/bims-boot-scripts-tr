@@ -8,6 +8,9 @@ LOG_FILE="/var/log/bims_boot.log"
 touch $LOG_FILE
 chmod 644 $LOG_FILE
 
+# Bandera para indicar si se necesita reiniciar Apache
+RESTART_NEEDED=0
+
 # Verificar e instalar Redis si no está instalado
 if ! rpm -q redis &>/dev/null; then
     echo "Instalando Redis..."
@@ -44,11 +47,42 @@ if ! grep -q "^session.save_handler = redis$" /etc/php.ini; then
         echo 'session.save_path = "tcp://'"$REDIS_HOST"':'"$REDIS_PORT"'"' >> /etc/php.ini
     fi
 
-    # Reiniciar el servicio httpd para aplicar los cambios
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Reiniciando Apache para aplicar configuración de Redis" >> $LOG_FILE
-    systemctl restart httpd
+    # Señalar que se necesita reiniciar Apache
+    RESTART_NEEDED=1
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Se aplicaron cambios en php.ini para Redis." >> $LOG_FILE
 else
     echo "Redis ya está configurado como manejador de sesiones en php.ini."
 fi
 
+# Archivo de configuración de Apache
+CONFIG_FILE="/etc/httpd/conf.d/php.conf"
 
+# Líneas a buscar y comentar
+LINE1='php_value session.save_handler "files"'
+LINE2='php_value session.save_path "/var/lib/php/session"'
+
+# Función para comentar una línea si no está comentada
+comment_line_if_uncommented() {
+    local line="$1"
+    local file="$2"
+    # Verifica si la línea existe sin comentar y la comenta si es necesario
+    if grep -Fxq "$line" "$file"; then
+        sed -i "s|^$line|# $line|" "$file"
+        echo "Comentada la línea: $line"
+        RESTART_NEEDED=1
+    else
+        echo "La línea ya está comentada o no existe: $line"
+    fi
+}
+
+# Comentar las líneas si es necesario
+comment_line_if_uncommented "$LINE1" "$CONFIG_FILE"
+comment_line_if_uncommented "$LINE2" "$CONFIG_FILE"
+
+# Reiniciar Apache solo si hubo cambios
+if [ $RESTART_NEEDED -eq 1 ]; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Reiniciando Apache para aplicar cambios en la configuración." >> $LOG_FILE
+    systemctl restart httpd
+else
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - No se detectaron cambios, no se reiniciará Apache." >> $LOG_FILE
+fi
