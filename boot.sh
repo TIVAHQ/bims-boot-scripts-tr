@@ -6,6 +6,11 @@ BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Iniciado" >> $LOG_FILE
 
 ############################################################################################################
+# Se instala redis (incluir luego en el servidor modelo)
+bash $BOOT_SCRIPTS_PATH/install/install_redis.sh
+############################################################################################################
+
+############################################################################################################
 # Se instala el comando bims_sync
 bash $BOOT_SCRIPTS_PATH/install/install_bims_sync.sh
 ############################################################################################################
