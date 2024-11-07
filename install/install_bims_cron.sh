@@ -11,4 +11,4 @@ rm -f /etc/cron.d/backups_clientes;
 rm -f /etc/cron.d/gcloud;
 
 systemctl restart crond;
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Se ha instalado el comando bims_boot" >> /var/log/bims_boot.log
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Se actualizó el cron" >> /var/log/bims_boot.log
