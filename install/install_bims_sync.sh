@@ -7,7 +7,7 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando key para rsync" >> /var/log/bims
 # Se crea el directorio /root/rsync si no existe
 # mkdir -p /root/rsync;
 # Se copian los archivos de configuración de rsync
-rm -f /root/rsync/rsync;
+rm -rf /root/rsync/rsync;
 cp -f $BOOT_SCRIPTS_PATH/rsync/exclusions.txt /root/rsync/exclusions.txt;
 
 cp -R $BOOT_SCRIPTS_PATH/rsync /root/rsync;
