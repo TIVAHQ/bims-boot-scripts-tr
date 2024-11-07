@@ -1,4 +1,5 @@
 BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
+LOG_FILE="/var/log/bims_boot.log"
 
 # Verifica si hay diferencias entre /etc/php.ini y $BOOT_SCRIPTS_PATH/etc/php.ini
 if ! diff -q /etc/php.ini $BOOT_SCRIPTS_PATH/etc/php.ini &>/dev/null; then

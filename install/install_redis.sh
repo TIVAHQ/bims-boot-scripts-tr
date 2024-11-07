@@ -5,8 +5,6 @@ REDIS_PORT="6379"
 
 # Archivo de log
 LOG_FILE="/var/log/bims_boot.log"
-touch $LOG_FILE
-chmod 644 $LOG_FILE
 
 # Bandera para indicar si se necesita reiniciar Apache
 RESTART_NEEDED=0
