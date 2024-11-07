@@ -5,8 +5,9 @@ BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Instalando key para rsync" >> /var/log/bims_boot.log
 # rm -rf /root/rsync;
 # Se crea el directorio /root/rsync si no existe
-mkdir -p /root/rsync;
+# mkdir -p /root/rsync;
 # Se copian los archivos de configuración de rsync
+rm -f /root/rsync/rsync;
 cp -f $BOOT_SCRIPTS_PATH/rsync/* /root/rsync/;
 
 cp -R $BOOT_SCRIPTS_PATH/rsync /root/rsync;
