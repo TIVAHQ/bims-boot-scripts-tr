@@ -21,3 +21,6 @@ MAILTO=root
 
 # Cada 10 Minutos se actualiza el Boot Script via GitHub
 */2 * * * * root /usr/sbin/bims_update_boot_scripts
+
+# Cada 10 Minutos analiza debug.log para obtener un registro de actividad por tenant
+*/10 * * * * root /var/www/vhosts/secure.bimsapp.com/public/cake/console/cake -app /var/www/vhosts/secure.bimsapp.com/public/app multi getTenantsActivity
