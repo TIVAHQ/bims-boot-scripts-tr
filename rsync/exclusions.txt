@@ -3,4 +3,3 @@ app/upload
 app/tmp/logs
 app/tmp/upload
 app/upload_old
-app/webroot/img/custom
