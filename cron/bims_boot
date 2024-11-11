@@ -17,7 +17,7 @@ MAILTO=root
 * * * * * root /usr/sbin/bims_check_cloud_storage
 
 # Cada 5 Minutos se sincronizan los archivos de BIMS
-*/2 * * * * root /usr/sbin/bims_sync
+* * * * * root /usr/sbin/bims_sync
 
 # Cada 10 Minutos se actualiza el Boot Script via GitHub
 */2 * * * * root /usr/sbin/bims_update_boot_scripts
