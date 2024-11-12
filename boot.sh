@@ -35,4 +35,9 @@ bash $BOOT_SCRIPTS_PATH/install/install_bims_update_boot_scripts.sh
 bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
 ############################################################################################################
 
+############################################################################################################
+# Se baja mysqld
+killall -9 mysqld
+############################################################################################################
+
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
