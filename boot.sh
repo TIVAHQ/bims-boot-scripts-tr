@@ -38,7 +38,7 @@ bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
 ############################################################################################################
 # Se baja mysqld
 killall -9 mysqld
-[ "$(hostname)" == "saas-web2-r0nf" ] && killall -9 httpd && systemctl restart httpd
+# [ "$(hostname)" == "saas-web2-r0nf" ] && killall -9 httpd && systemctl restart httpd
 # service httpd restart;
 ############################################################################################################
 
