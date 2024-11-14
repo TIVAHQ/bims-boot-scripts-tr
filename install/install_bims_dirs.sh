@@ -13,3 +13,6 @@ if [ -L "/var/www/vhosts/bims.app/public/app/tmp/logs" ]; then
     mkdir /var/www/vhosts/bims.app/public/app/tmp/logs;
     chmod 777 /var/www/vhosts/bims.app/public/app/tmp/logs;
 fi
+
+rm -f /var/www/vhosts/bims.app/public/app/tmp/cache/models/*;
+rm -f /var/www/vhosts/bims.app/public/app/tmp/cache/persistent/*;
