@@ -4,16 +4,16 @@ MOUNT_POINT="/mnt/bims-bucket-1/saas/tmp/upload"
 SYMLINK_PATH="/var/www/vhosts/bims.app/public/app/tmp/upload"
 SLEEP_INTERVAL=5
 
-while true; do
-    if mountpoint -q $(dirname "$MOUNT_POINT") && [ -d "$MOUNT_POINT" ]; then
+# while true; do
+#     if mountpoint -q $(dirname "$MOUNT_POINT") && [ -d "$MOUNT_POINT" ]; then
         rm -rf "$SYMLINK_PATH"
         ln -s "$MOUNT_POINT" "$SYMLINK_PATH"
         chmod 777 "$SYMLINK_PATH"
-        break
-    else
-        sleep "$SLEEP_INTERVAL"
-    fi
-done
+#         break
+#     else
+#         sleep "$SLEEP_INTERVAL"
+#     fi
+# done
 
 # rm -rf /var/www/vhosts/bims.app/public/app/tmp/upload;
 # ln -s /mnt/bims-bucket-1/saas/tmp/upload /var/www/vhosts/bims.app/public/app/tmp/upload;
