@@ -16,3 +16,5 @@ fi
 
 rm -f /var/www/vhosts/bims.app/public/app/tmp/cache/models/*;
 rm -f /var/www/vhosts/bims.app/public/app/tmp/cache/persistent/*;
+
+# dummy
