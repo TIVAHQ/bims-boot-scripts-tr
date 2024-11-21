@@ -2,4 +2,5 @@ app/webroot/img/upload
 app/upload
 app/tmp/logs
 app/tmp/upload
+app/tmp/cache
 app/upload_old
