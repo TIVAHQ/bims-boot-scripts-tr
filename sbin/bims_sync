@@ -1,1 +1,29 @@
-rsync -az -e "ssh -i /root/rsync/rsync_key" --exclude-from='/root/rsync/exclusions.txt' root@10.158.0.9:/var/www/vhosts/secure.bimsapp.com/public/ /var/www/vhosts/bims.app/public/ -v
+#!/bin/bash
+
+# Variables
+RSYNC_COMMAND="rsync -az -e \"ssh -i /root/rsync/rsync_key\" --exclude-from='/root/rsync/exclusions.txt' root@10.158.0.9:/var/www/vhosts/secure.bimsapp.com/public/ /var/www/vhosts/bims.app/public/ -v"
+WATCHED_DIR="/var/www/vhosts/secure.bimsapp.com/public/sql/sprints"
+CACHE_DIR_MODELS="/var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/models/*"
+CACHE_DIR_PERSISTENT="/var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*"
+TEMP_FILE="/tmp/rsync_changes.log"
+
+# 1. Ejecutar el comando rsync y guardar el resultado en un archivo temporal
+eval $RSYNC_COMMAND > "$TEMP_FILE"
+
+# 2. Verificar si hubo cambios en el directorio observado
+if grep -q "$WATCHED_DIR" "$TEMP_FILE"; then
+    echo "Cambios detectados en $WATCHED_DIR. Eliminando caché..."
+    rm -rf $CACHE_DIR_MODELS
+    rm -rf $CACHE_DIR_PERSISTENT
+    echo "Caché eliminada exitosamente."
+else
+    echo "No se detectaron cambios en $WATCHED_DIR. No se elimina la caché."
+fi
+
+# 3. Limpiar el archivo temporal
+rm -f "$TEMP_FILE"
+
+exit 0
+
+
+# rsync -az -e "ssh -i /root/rsync/rsync_key" --exclude-from='/root/rsync/exclusions.txt' root@10.158.0.9:/var/www/vhosts/secure.bimsapp.com/public/ /var/www/vhosts/bims.app/public/ -v
