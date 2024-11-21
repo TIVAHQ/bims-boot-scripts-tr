@@ -20,6 +20,8 @@ else
     echo "No se detectaron cambios en $WATCHED_DIR. No se elimina la caché."
 fi
 
+cat "$TEMP_FILE"
+
 # 3. Limpiar el archivo temporal
 rm -f "$TEMP_FILE"
 
