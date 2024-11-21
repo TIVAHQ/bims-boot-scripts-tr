@@ -47,4 +47,7 @@ killall -9 mysqld
 # service httpd restart;
 ############################################################################################################
 
+rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/models/*
+rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*
+
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
