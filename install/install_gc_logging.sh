@@ -52,7 +52,7 @@ if [ ! -f "$DEST_FILE" ]; then
     # Crear el directorio si no existe
     if [ ! -d "$DIR" ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') - El directorio $DIR no existe. Creándolo..." >> "$LOG_FILE"
-        .mkdir -p "$DIR"
+        mkdir -p "$DIR"
     fi
 
     # Copiar el archivo
