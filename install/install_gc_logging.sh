@@ -52,12 +52,12 @@ if [ ! -f "$DEST_FILE" ]; then
     # Crear el directorio si no existe
     if [ ! -d "$DIR" ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') - El directorio $DIR no existe. Creándolo..." >> "$LOG_FILE"
-        sudo mkdir -p "$DIR"
+        .mkdir -p "$DIR"
     fi
 
     # Copiar el archivo
     if [ -f "$SOURCE_FILE" ]; then
-        sudo cp "$SOURCE_FILE" "$DEST_FILE"
+        cp "$SOURCE_FILE" "$DEST_FILE"
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Archivo copiado correctamente a $DEST_FILE." >> "$LOG_FILE"
 
         # Reiniciar el servicio google-fluentd y esperar a que esté activo
