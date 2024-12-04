@@ -13,25 +13,24 @@ SOURCE_FILE="$BOOT_SCRIPTS_PATH/etc/google-fluentd/bims.conf"
 
 # Verificar si google-fluentd está instalado
 if ! command -v google-fluentd &> /dev/null; then
-    echo "google-fluentd no está instalado. Procediendo a instalarlo..."
     echo "$(date '+%Y-%m-%d %H:%M:%S') - google-fluentd no está instalado. Procediendo a instalarlo..." >> /var/log/bims_boot.log
 
     # Descargar el script para agregar el repositorio de logging agent
     curl -sSO https://dl.google.com/cloudagents/add-logging-agent-repo.sh
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Se ha descargado el script para agregar el repositorio de logging agent." >> /var/log/bims_boot.log
 
     # Ejecutar el script para agregar el repositorio
-    sudo bash add-logging-agent-repo.sh
+    bash add-logging-agent-repo.sh
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Se ha agregado el repositorio de logging agent." >> /var/log/bims_boot.log
 
     # Instalar google-fluentd
-    sudo yum install -y google-fluentd
+    yum install -y google-fluentd
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Se ha instalado google-fluentd." >> /var/log/bims_boot.log
 
     # Iniciar el servicio google-fluentd
-    sudo systemctl start google-fluentd
-
-    echo "google-fluentd se ha instalado y se ha iniciado correctamente."
+    systemctl start google-fluentd
     echo "$(date '+%Y-%m-%d %H:%M:%S') - google-fluentd se ha instalado y se ha iniciado correctamente." >> /var/log/bims_boot.log
 else
-    echo "google-fluentd ya está instalado."
     echo "$(date '+%Y-%m-%d %H:%M:%S') - google-fluentd ya está instalado." >> /var/log/bims_boot.log
 fi
 
