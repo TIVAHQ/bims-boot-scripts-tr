@@ -14,6 +14,7 @@ SOURCE_FILE="$BOOT_SCRIPTS_PATH/etc/google-fluentd/bims.conf"
 # Verificar si google-fluentd está instalado
 if ! command -v google-fluentd &> /dev/null; then
     echo "google-fluentd no está instalado. Procediendo a instalarlo..."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - google-fluentd no está instalado. Procediendo a instalarlo..." >> /var/log/bims_boot.log
 
     # Descargar el script para agregar el repositorio de logging agent
     curl -sSO https://dl.google.com/cloudagents/add-logging-agent-repo.sh
@@ -28,8 +29,10 @@ if ! command -v google-fluentd &> /dev/null; then
     sudo systemctl start google-fluentd
 
     echo "google-fluentd se ha instalado y se ha iniciado correctamente."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - google-fluentd se ha instalado y se ha iniciado correctamente." >> /var/log/bims_boot.log
 else
     echo "google-fluentd ya está instalado."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - google-fluentd ya está instalado." >> /var/log/bims_boot.log
 fi
 
 
