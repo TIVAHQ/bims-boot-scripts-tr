@@ -59,7 +59,15 @@ if [ ! -f "$DEST_FILE" ]; then
     if [ -f "$SOURCE_FILE" ]; then
         sudo cp "$SOURCE_FILE" "$DEST_FILE"
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Archivo copiado correctamente a $DEST_FILE." >> "$LOG_FILE"
-        sudo systemctl restart google-fluentd
+
+        # Reiniciar el servicio google-fluentd y esperar a que esté activo
+        systemctl restart google-fluentd
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Intentando reiniciar google-fluentd." >> "$LOG_FILE"
+        if ! systemctl is-active --quiet google-fluentd; then
+            echo "$(date '+%Y-%m-%d %H:%M:%S') - El servicio google-fluentd no pudo iniciarse correctamente." >> "$LOG_FILE"
+            exit 1
+        fi
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - google-fluentd se ha reiniciado correctamente." >> "$LOG_FILE"
     else
         echo "$(date '+%Y-%m-%d %H:%M:%S') - El archivo fuente $SOURCE_FILE no existe. No se pudo copiar." >> "$LOG_FILE"
     fi
