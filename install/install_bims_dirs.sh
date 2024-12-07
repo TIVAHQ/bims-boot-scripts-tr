@@ -10,6 +10,7 @@ SLEEP_INTERVAL=10
         ln -s "$MOUNT_POINT" "$SYMLINK_PATH"
         chmod 777 "$SYMLINK_PATH"
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Se instaló $SYMLINK_PATH > $MOUNT_POINT" >> /var/log/bims_boot.log
+        
 #         break
 #     else
 #         sleep "$SLEEP_INTERVAL"
