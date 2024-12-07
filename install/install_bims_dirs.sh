@@ -2,7 +2,7 @@
 
 MOUNT_POINT="/mnt/bims-bucket-1/saas/tmp/upload"
 SYMLINK_PATH="/var/www/vhosts/bims.app/public/app/tmp/upload"
-SLEEP_INTERVAL=5
+SLEEP_INTERVAL=10
 
 # while true; do
 #     if mountpoint -q $(dirname "$MOUNT_POINT") && [ -d "$MOUNT_POINT" ]; then
