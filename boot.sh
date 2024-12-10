@@ -54,4 +54,7 @@ bash $BOOT_SCRIPTS_PATH/install/install_gc_logging.sh
 rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/models/*
 rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*
 
+daemon --name bims-push-nossl --stop
+daemon --name bims-push-ssl --stop
+
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
