@@ -46,8 +46,9 @@ else
 fi
 
 # Verificar si el archivo ya existe
-if [ ! -f "$DEST_FILE" ]; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - El archivo $DEST_FILE no existe. Procediendo a copiarlo desde $SOURCE_FILE..." >> "$LOG_FILE"
+if ! diff -q $DEST_FILE $SOURCE_FILE &>/dev/null; then
+    rm -f "$DEST_FILE"
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - El archivo $DEST_FILE tiene modificaciones. Procediendo a reemplazarlo desde $SOURCE_FILE..." >> "$LOG_FILE"
 
     # Crear el directorio si no existe
     if [ ! -d "$DIR" ]; then
