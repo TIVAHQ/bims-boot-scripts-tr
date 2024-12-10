@@ -73,5 +73,5 @@ if ! diff -q $DEST_FILE $SOURCE_FILE &>/dev/null; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') - El archivo fuente $SOURCE_FILE no existe. No se pudo copiar." >> "$LOG_FILE"
     fi
 else
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - El archivo $DEST_FILE ya existe. No se realizó ninguna acción." >> "$LOG_FILE"
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - El archivo $DEST_FILE se encuentra actualizado." >> "$LOG_FILE"
 fi
