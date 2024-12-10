@@ -6,6 +6,7 @@ if ! diff -q /etc/php.ini $BOOT_SCRIPTS_PATH/etc/php.ini &>/dev/null; then
     echo "Actualizando /etc/php.ini..."
     cp -f $BOOT_SCRIPTS_PATH/etc/php.ini /etc/php.ini
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Se actualizó /etc/php.ini" >> $LOG_FILE
+    killall -9 httpd
     systemctl restart httpd
 else
     echo "/etc/php.ini ya está actualizado."
