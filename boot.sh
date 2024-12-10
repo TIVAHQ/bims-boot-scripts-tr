@@ -50,6 +50,14 @@ killall -9 mysqld
 ############################################################################################################
 # Se instala Google Cloud Logging
 bash $BOOT_SCRIPTS_PATH/install/install_gc_logging.sh
+############################################################################################################
+
+############################################################################################################
+# Se configura el LogLevel de Apache
+bash $BOOT_SCRIPTS_PATH/install/install_apache_log_level.sh
+############################################################################################################
+
+
 
 rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/models/*
 rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*
