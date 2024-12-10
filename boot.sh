@@ -37,7 +37,7 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Iniciado" >> $LOG_FILE
 
 ############################################################################################################
 # Se instala el comando bims_cron_1 y se programa su ejecución cada 1 minuto
-bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
+# ˝bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
 ############################################################################################################
 
 ############################################################################################################
@@ -49,7 +49,7 @@ killall -9 mysqld
 
 ############################################################################################################
 # Se instala Google Cloud Logging
-bash $BOOT_SCRIPTS_PATH/install/install_gc_logging.sh
+# bash $BOOT_SCRIPTS_PATH/install/install_gc_logging.sh
 
 rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/models/*
 rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*
