@@ -53,8 +53,9 @@ bash $BOOT_SCRIPTS_PATH/install/install_gc_logging.sh
 ############################################################################################################
 
 ############################################################################################################
-# Se configura el LogLevel de Apache
+# Se configura el  Apache
 bash $BOOT_SCRIPTS_PATH/install/install_apache_log_level.sh
+bash $BOOT_SCRIPTS_PATH/install/install_apache_bims.sh
 ############################################################################################################
 
 
