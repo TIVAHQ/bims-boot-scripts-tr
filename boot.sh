@@ -17,12 +17,12 @@ bash $BOOT_SCRIPTS_PATH/install/install_phpini.sh
 
 ############################################################################################################
 # Se instala el comando bims_sync
-# bash $BOOT_SCRIPTS_PATH/install/install_bims_sync.sh
+bash $BOOT_SCRIPTS_PATH/install/install_bims_sync.sh
 ############################################################################################################
 
 ############################################################################################################
 # Se instala el watchdog del bucket de Google Cloud Storage
-# bash $BOOT_SCRIPTS_PATH/install/install_bims_check_cloud_storage.sh
+bash $BOOT_SCRIPTS_PATH/install/install_bims_check_cloud_storage.sh
 ############################################################################################################
 
 ############################################################################################################
@@ -32,12 +32,12 @@ bash $BOOT_SCRIPTS_PATH/install/install_phpini.sh
 
 ############################################################################################################
 # Se instala el actualizado del script de booteo
-# bash $BOOT_SCRIPTS_PATH/install/install_bims_update_boot_scripts.sh
+bash $BOOT_SCRIPTS_PATH/install/install_bims_update_boot_scripts.sh
 ############################################################################################################
 
 ############################################################################################################
 # Se instala el comando bims_cron_1 y se programa su ejecución cada 1 minuto
-# ˝bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
+bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
 ############################################################################################################
 
 ############################################################################################################
