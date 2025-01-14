@@ -66,4 +66,6 @@ rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*
 daemon --name bims-push-nossl --stop
 daemon --name bims-push-ssl --stop
 
+mv /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm_old;
+
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
