@@ -72,4 +72,24 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - mv /var/www/vhosts/secure.bimsapp.com/publi
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
 
 # killall -9 httpd;
+
 # service httpd restart;
+
+#!/bin/bash
+
+# Verifica si Apache está corriendo
+if ! pgrep -x "httpd" > /dev/null; then
+    echo "Apache no está corriendo. Liberando semáforos y reiniciando el servicio..."
+
+    # Liberar semáforos de Apache
+    for id in $(ipcs -s | awk '$3 == "apache" {print $2}'); do
+        ipcrm -s $id
+    done
+
+    # Reiniciar Apache
+    service httpd restart
+
+    echo "Proceso completado."
+else
+    echo "Apache está corriendo correctamente."
+fi
