@@ -72,4 +72,4 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - mv /var/www/vhosts/secure.bimsapp.com/publi
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
 
 killall -9 httpd;
-service htpd restart;
+service httpd restart;
