@@ -70,3 +70,6 @@ mv /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm /var/www/vhosts/se
 echo "$(date '+%Y-%m-%d %H:%M:%S') - mv /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm_old" >> /var/log/bims_boot.log
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
+
+killall -9 httpd;
+service htpd restart;
