@@ -73,7 +73,7 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_bo
 
 killall -9 httpd;
 
-# service httpd restart;
+service httpd restart;
 
 #!/bin/bash
 
