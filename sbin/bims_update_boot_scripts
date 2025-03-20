@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Este script se ejecuta cada 1 minuto
-BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
+BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts-tr"
 GIT_COMMIT_LOG_FILE="$BOOT_SCRIPTS_PATH/last_commit.txt"
 
 # Se lee el valor del último commit

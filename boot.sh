@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOG_FILE="/var/log/bims_boot.log"
-BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
+BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts-tr"
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Iniciado" >> $LOG_FILE
 
@@ -12,7 +12,7 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Iniciado" >> $LOG_FILE
 
 ############################################################################################################
 # Se actualiza php.ini
-bash $BOOT_SCRIPTS_PATH/install/install_phpini.sh
+# bash $BOOT_SCRIPTS_PATH/install/install_phpini.sh
 ############################################################################################################
 
 ############################################################################################################
@@ -42,38 +42,38 @@ bash $BOOT_SCRIPTS_PATH/install/install_bims_cron.sh
 
 ############################################################################################################
 # Se baja mysqld
-killall -9 mysqld
+# killall -9 mysqld
 # [ "$(hostname)" == "saas-web2-r0nf" ] && killall -9 httpd && systemctl restart httpd
 # service httpd restart;
 ############################################################################################################
 
 ############################################################################################################
 # Se instala Google Cloud Logging
-bash $BOOT_SCRIPTS_PATH/install/install_gc_logging.sh
+# bash $BOOT_SCRIPTS_PATH/install/install_gc_logging.sh
 ############################################################################################################
 
 ############################################################################################################
 # Se configura el  Apache
-bash $BOOT_SCRIPTS_PATH/install/install_apache_log_level.sh
-bash $BOOT_SCRIPTS_PATH/install/install_apache_bims.sh
+# bash $BOOT_SCRIPTS_PATH/install/install_apache_log_level.sh
+# bash $BOOT_SCRIPTS_PATH/install/install_apache_bims.sh
 ############################################################################################################
 
 
 
-rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/models/*
-rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*
+# rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/models/*
+# rm -rf /var/www/vhosts/secure.bimsapp.com/public/app/tmp/cache/persistent/*
 
-daemon --name bims-push-nossl --stop
-daemon --name bims-push-ssl --stop
+# daemon --name bims-push-nossl --stop
+# daemon --name bims-push-ssl --stop
 
-mv /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm_old;
-echo "$(date '+%Y-%m-%d %H:%M:%S') - mv /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm_old" >> /var/log/bims_boot.log
+# mv /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm_old;
+# echo "$(date '+%Y-%m-%d %H:%M:%S') - mv /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm /var/www/vhosts/secure.bimsapp.com/public/app/webroot/jspm_old" >> /var/log/bims_boot.log
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Boot Script Finalizado" >> /var/log/bims_boot.log
 
-killall -9 httpd;
+# killall -9 httpd;
 
-service httpd restart;
+# service httpd restart;
 
 #!/bin/bash
 
