@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts"
+BOOT_SCRIPTS_PATH="/opt/install/bims-boot-scripts-tr"
 
 # Si existe una diferencia entre los archivos $BOOT_SCRIPTS_PATH/cron/bims_boot y /etc/cron.d/bims_boot, se actualiza el cron
 if [ -f /etc/cron.d/bims_boot ]; then
